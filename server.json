@@ -5,32 +5,48 @@
       "name": "Ao molho",
       "description": "Macarrão ao molho branco, fughi e cheiro verde das montanhas",
       "price": "19.90",
-      "available": true,
+      "available": false,
       "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png"
     },
     {
       "id": 2,
       "name": "Veggie",
-      "description": "Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia.",
+      "description": "Macarrão com pimentão, ervilha e ervas finas colhidas no himalaia",
       "price": "21.90",
-      "available": true,
+      "available": false,
       "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food2.png"
     },
     {
-      "id": 3,
-      "name": "A la Camarón",
-      "description": "Macarrão com vegetais de primeira linha e camarão dos 7 mares.",
-      "price": "25.90",
-      "available": false,
-      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food3.png"
-    },
-    {
-      "image": "https://photos.bigoven.com/recipe/hero/pesto-pasta-with-spring-vegeta-3ce019.jpg?h=300&w=300",
+      "image": "https://i.pinimg.com/474x/52/f7/01/52f7010e4f4c6e7d95adb859ff76c9dd.jpg",
       "name": "Al pesto",
-      "price": "18.90",
-      "description": "Fetuccine ao molho pesto",
+      "price": "19.70",
+      "description": "Spaghetti ao molho pesto com um toque generoso de queijo parmesão para finalizar",
       "available": true,
       "id": 4
+    },
+    {
+      "image": "https://images.rappi.com.br/products/11a00b0e-1d7e-413b-b0ec-a35a1ff11f12-1594147318849.jpeg?d=128x90",
+      "name": "Carbonara",
+      "price": "23.00",
+      "description": "Spaghetti ao molho de bacon e ovos, temperado com ervas finas e nós moscada",
+      "available": true,
+      "id": 5
+    },
+    {
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmY2pniVPje-ie7IdL18GgLCmPrNQNakxqPA&usqp=CAU",
+      "name": "Alla puttanesca",
+      "price": "21.80",
+      "description": "Massa tipo spaghetti servida com anchovas, azeitonas pretas, um toque de gengibre e molho vermelho",
+      "available": false,
+      "id": 6
+    },
+    {
+      "image": "https://ipcdn.freshop.com/resize?url=https://images.freshop.com/2185952446717624891/afc73a3575e89979c4ae07dc808c4804_large.png&width=256&type=webp&quality=80",
+      "name": "Alfredo",
+      "price": "18.90",
+      "description": "Fettuccine ao molho alfredo, acompanha iscas de salmão",
+      "available": true,
+      "id": 7
     }
   ]
 }

@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import { Food } from "../../components/Food";
 import { Header } from "../../components/Header";
 import { ModalAddFood } from "../../components/ModalAddFood";
+import { ModalEditFood } from "../../components/ModalEditFood";
 import { api } from "../../services/api";
-import { Food as FoodType } from "../../types";
+import { Food as TFood } from "../../types";
 
 import { FoodsContainer } from "./styles";
 
 export function Dashboard() {
-  const [foods, setFoods] = useState<FoodType[]>([]);
+  const [foods, setFoods] = useState<TFood[]>([]);
+  const [editingFood, setEditingFood] = useState<TFood>({} as TFood);
 
-  const [modalNewRecipeIsOpen, setModalNewRecipeIsOpen] = useState(false);
+  const [modalNewFoodIsOpen, setModalNewFoodIsOpen] = useState(false);
+  const [modalEditFoodIsOpen, setModalEditFoodIsOpen] = useState(false);
 
   useEffect(() => {
     api.get("/foods").then((response) => {
@@ -19,11 +22,20 @@ export function Dashboard() {
     });
   }, []);
 
-  function toggleModalNewRecipe() {
-    setModalNewRecipeIsOpen(!modalNewRecipeIsOpen);
+  function toggleModalNewFood() {
+    setModalNewFoodIsOpen(!modalNewFoodIsOpen);
   }
 
-  async function handleAddFood(food: FoodType) {
+  function toggleModalEditFood() {
+    setModalEditFoodIsOpen(!modalEditFoodIsOpen);
+  }
+
+  function handleEditFood(food: TFood) {
+    setEditingFood(food);
+    toggleModalEditFood();
+  }
+
+  async function handleAddFood(food: TFood) {
     try {
       const response = await api.post("/foods", {
         ...food,
@@ -31,6 +43,23 @@ export function Dashboard() {
       });
 
       setFoods([...foods, response.data]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function handleUpdateFood(food: TFood) {
+    try {
+      const foodUpdated = await api.put(`/foods/${editingFood.id}`, {
+        ...editingFood,
+        ...food,
+      });
+
+      const foodsUpdated = foods.map((f) =>
+        f.id !== foodUpdated.data.id ? f : foodUpdated.data
+      );
+
+      setFoods(foodsUpdated);
     } catch (err) {
       console.log(err);
     }
@@ -46,12 +75,19 @@ export function Dashboard() {
 
   return (
     <>
-      <Header handleOpenModal={toggleModalNewRecipe} />
+      <Header handleOpenModal={toggleModalNewFood} />
 
       <ModalAddFood
-        isOpen={modalNewRecipeIsOpen}
-        setIsOpen={toggleModalNewRecipe}
+        isOpen={modalNewFoodIsOpen}
+        setIsOpen={toggleModalNewFood}
         handleAddFood={handleAddFood}
+      />
+
+      <ModalEditFood
+        isOpen={modalEditFoodIsOpen}
+        setIsOpen={toggleModalEditFood}
+        editingFood={editingFood}
+        handleUpdateFood={handleUpdateFood}
       />
 
       <FoodsContainer data-testid="foods-list">
@@ -60,7 +96,7 @@ export function Dashboard() {
             key={f.id}
             food={f}
             handleDelete={handleDeleteFood}
-            // handleEditFood={this.handleEditFood}
+            handleEditFood={handleEditFood}
           />
         ))}
       </FoodsContainer>
